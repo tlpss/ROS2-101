@@ -19,16 +19,17 @@ endif()
 find_package(ament_cmake REQUIRED)
 find_package(rclcpp REQUIRED)
 
-add_executable(empty_cpp_node src/empty_cpp_node.cpp)
-target_include_directories(empty_cpp_node PUBLIC
+add_executable(empty_cpp_node src/empty_cpp_node.cpp) # create an executable (that can be called with ros2 run)
+target_include_directories(empty_cpp_node PUBLIC # make the include directory linked to the executable publically available (.h file)
   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
   $<INSTALL_INTERFACE:include>)
-ament_target_dependencies(
+
+ament_target_dependencies( # link dependencies for the executable
   empty_cpp_node
   "rclcpp"
 )
 
-install(TARGETS empty_cpp_node
+install(TARGETS empty_cpp_node # install the executable
   DESTINATION lib/${PROJECT_NAME})
 
 if(BUILD_TESTING)
