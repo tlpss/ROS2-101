@@ -21,16 +21,19 @@ running ros code always involves a few steps:
 - run the executable nodes or run launch files (after creating them)
 
 
+
 ### package creation
  (cf https://docs.ros.org/en/foxy/Tutorials/Creating-Your-First-ROS2-Package.html)
-- python: `ros2 pkg create <package name> [--node-name <node name> ] --build-type ament_python --dependencies rclpy`
-- cpp: `ros2 pkg create --build-type ament_cmake [--node-name <node name>] <package name>  --dependencies rclcpp`
+- rclpy: `ros2 pkg create <package name> [--node-name <node name> ] --build-type ament_python --dependencies rclpy`
+- rclcpp: `ros2 pkg create --build-type ament_cmake [--node-name <node name>] <package name>  --dependencies rclcpp`
 
-where `ament_cmake/python` tells colcon which additional files to create to build the packages (setup.cfg setup.py vs cmakelist.txt)
+where `ament_cmake/python` tells colcon which additional files to create to build the packages (setup.cfg setup. py vs cmakelist.txt)
 
-### cmakelist syntax
-
-### setup.py syntax
+to see examples of this template, see the `empty_{cpp|python}` nodes.
+### cmakelist syntax (rclcpp)
+https://docs.ros.org/en/foxy/How-To-Guides/Ament-CMake-Documentation.html 
+### setup. py syntax (rclpy)
+just include the executables (entrypoints).. no build etc required, so considerably easier.
 
 
 #### run vs launch
@@ -43,3 +46,16 @@ where `ament_cmake/python` tells colcon which additional files to create to buil
 - rqt 
 -rqt_graph (nodes/topics)
 - cli interface with topics/services/actions/...
+
+### testing
+- build using colcon
+- to run the tests`colcon test --packages-select <package>`
+- to see the test output `colcon test-result --test-result-base build/<package> --verbose`
+
+#### creating tests
+| client | library unittest | ros unittest | ros integrationtest|
+| --- | ---- | --- |---|
+| rclcpp| gtest | .. | .. | 
+| rclpy | unittest | ..| .. |
+
+
