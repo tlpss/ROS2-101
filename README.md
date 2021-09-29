@@ -2,12 +2,14 @@
 Some ROS2 examples made during my exploration to complement the available documentation &amp; tutorials
 
 ## installation
-- install ros2 [foxy](https://docs.ros.org/en/foxy/Installation.html)
+- install [ros2 foxy](https://docs.ros.org/en/foxy/Installation.html)
 
-- add .vscode ros [extension](https://marketplace.visualstudio.com/items?itemName=ms-iot.vscode-ros)
+- add [.vscode ros extension](https://marketplace.visualstudio.com/items?itemName=ms-iot.vscode-ros)
 
 ## information sources
 - https://docs.ros.org/en/foxy/Tutorials.html
+- example node https://github.com/SteveMacenski/slam_toolbox/tree/foxy-devel (and Nav2 stack in general)
+- gh actions CI https://github.com/marketplace/actions/ros-2-ci-action#Build-and-run-tests-for-your-ROS-2-package
 
 
 
@@ -48,7 +50,7 @@ just include the executables (entrypoints).. no build etc required, so considera
 - cli interface with topics/services/actions/...
 
 ### testing
-- build using colcon
+- build using colcon  (with arg to create compilation database for vscode IDE ) `colcon build --cmake-args -DCMAKE_EXPORT_COMPILE_COMMANDS=1`
 - to run the tests`colcon test --packages-select <package>`
 - to see the test output `colcon test-result --test-result-base build/<package> --verbose`
 
