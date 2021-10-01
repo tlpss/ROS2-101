@@ -15,19 +15,19 @@
  *
  */
 
-# ifndef DUMMYNODE_DUMMY_TEST_H_
-# define DUMMYNODE_DUMMY_TEST_H_
+#ifndef DUMMYNODE_DUMMY_TEST_H_
+#define DUMMYNODE_DUMMY_TEST_H_
 
-#include<gtest/gtest.h>
+#include <gtest/gtest.h>
 
 namespace test
 {
-    
-TEST(dummy_suite, dummy_test_1) { // test suite, test name
-    EXPECT_STRNE("test", "test1");
-    EXPECT_EQ(2*4,8);
-}
-} // namespace test
 
+    TEST(dummy_suite, dummy_test_1)
+    {  // test suite, test name
+        EXPECT_STRNE("test", "test1");
+        EXPECT_EQ(2 * 4, 8);
+    }
+}  // namespace test
 
-# endif
+#endif
