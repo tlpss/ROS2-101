@@ -1,4 +1,12 @@
 {
     "ros.distro": "foxy",
-    "python.linting.enabled": true
+    "python.linting.enabled": true,
+    "python.autoComplete.extraPaths": [
+        "/home/tlips/Documents/ROS2-snippets/install/empty_python/lib/python3.8/site-packages",
+        "/opt/ros/foxy/lib/python3.8/site-packages"
+    ],
+    "python.analysis.extraPaths": [
+        "/home/tlips/Documents/ROS2-snippets/install/empty_python/lib/python3.8/site-packages",
+        "/opt/ros/foxy/lib/python3.8/site-packages"
+    ]
 }

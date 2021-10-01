@@ -53,7 +53,8 @@ just include the executables (entrypoints).. no build etc required, so considera
 - build using colcon  (with arg to create compilation database for vscode IDE ) `colcon build --cmake-args -DCMAKE_EXPORT_COMPILE_COMMANDS=1`
 - to run the tests`colcon test --packages-select <package>`
 - to see the test output `colcon test-result --test-result-base build/<package> --verbose`
-
+#### license sidenote:
+- ament requires license + copyrights to pass the tests.. TODO-> find way to disable this.
 #### creating tests
 | client | library unittest | ros unittest | ros integrationtest|
 | --- | ---- | --- |---|
