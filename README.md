@@ -4,12 +4,13 @@ Some ROS2 examples made during my exploration to complement the available docume
 ## installation
 - install [ros2 foxy](https://docs.ros.org/en/foxy/Installation.html)
 
-- add [.vscode ros extension](https://marketplace.visualstudio.com/items?itemName=ms-iot.vscode-ros)
+- add [.vscode ros extension](https://marketplace.visualstudio.com/items?itemName=ms-iot.vscode-ros), cmake, cmaketools, pylance, c++ intellisense (and configure, see vs code setup link)
 
 ## information sources
 - https://docs.ros.org/en/foxy/Tutorials.html
 - example node https://github.com/SteveMacenski/slam_toolbox/tree/foxy-devel (and Nav2 stack in general)
 - gh actions CI https://github.com/marketplace/actions/ros-2-ci-action#Build-and-run-tests-for-your-ROS-2-package
+- vs code setup https://samarth-robo.github.io/blog/2020/12/03/vscode_ros.html 
 
 
 
@@ -59,6 +60,6 @@ just include the executables (entrypoints).. no build etc required, so considera
 | client | library unittest | ros unittest | ros integrationtest|
 | --- | ---- | --- |---|
 | rclcpp| gtest | .. | .. | 
-| rclpy | unittest | ..| .. |
+| rclpy | unittest/pytest | ..| .. |
 
 

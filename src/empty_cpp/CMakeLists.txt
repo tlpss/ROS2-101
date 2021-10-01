@@ -29,7 +29,7 @@ ament_target_dependencies( # link dependencies for the executable
   "rclcpp"
 )
 
-install(TARGETS empty_cpp_node # install the executable
+install(TARGETS empty_cpp_node # install the headers/executables
   DESTINATION lib/${PROJECT_NAME})
 
 if(BUILD_TESTING)

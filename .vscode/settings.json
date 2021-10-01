@@ -8,5 +8,9 @@
     "python.analysis.extraPaths": [
         "/home/tlips/Documents/ROS2-snippets/install/empty_python/lib/python3.8/site-packages",
         "/opt/ros/foxy/lib/python3.8/site-packages"
-    ]
+    ],
+    "cmake.sourceDirectory": "${workspaceFolder}/src/empty_cpp",
+    "files.associations": {
+        "cstdio": "cpp"
+    }
 }
