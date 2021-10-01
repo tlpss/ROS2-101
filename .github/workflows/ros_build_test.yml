@@ -8,9 +8,9 @@ jobs:
     steps:
     - uses: ros-tooling/setup-ros@v0.2
       with:
-        required-ros-distributions: galactic
+        required-ros-distributions: foxy
     - uses: ros-tooling/action-ros-ci@v0.2
       with:
         package-name: ""
-        target-ros2-distro: galactic
+        target-ros2-distro: foxy
 
