@@ -63,3 +63,4 @@ just include the executables (entrypoints).. no build etc required, so considera
 | rclpy | unittest/pytest | ..| .. |
 
 
+[gtest](https://google.github.io/googletest/quickstart-cmake.html) documentation & [test/ build example](https://github.com/SteveMacenski/slam_toolbox/blob/foxy-devel/CMakeLists.txt)
