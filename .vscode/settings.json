@@ -11,6 +11,7 @@
     ],
     "cmake.sourceDirectory": "${workspaceFolder}/src/empty_cpp",
     "files.associations": {
-        "cstdio": "cpp"
+        "cstdio": "cpp",
+        "chrono": "cpp"
     }
 }

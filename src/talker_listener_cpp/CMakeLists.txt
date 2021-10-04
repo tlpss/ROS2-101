@@ -19,6 +19,10 @@ endif()
 find_package(ament_cmake REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(std_msgs REQUIRED)
+find_package(rclcpp_components REQUIRED)
+
+# include include 
+include_directories(include)
 
 # add executables and declare dependencies
 add_executable(listener src/listener.cpp)
@@ -31,17 +35,41 @@ ament_target_dependencies(
 # add component to library 
 add_library(talker_component SHARED
    src/talker_component.cpp)
-rclcpp_components_register_nodes(talker_component "Talker")
+# link component dependencies
+ament_target_dependencies(
+  talker_component
+  rclcpp 
+  std_msgs
+  rclcpp_components
+)
+rclcpp_components_register_nodes(talker_component "composition::Talker")
 
+
+
+# install dependencies to the lib to allow ros to find them
+install(
+  TARGETS 
+  listener
+  talker_component
+  DESTINATION lib/${PROJECT_NAME})
+
+  install(TARGETS # components require additional target? TODO: figure out why...
+  talker_component
+  ARCHIVE DESTINATION lib
+  LIBRARY DESTINATION lib
+  RUNTIME DESTINATION bin)
+
+# install launc files to allow ros to find them
+install(DIRECTORY
+  launch
+  DESTINATION share/${PROJECT_NAME}/
+)
 
 # include library headers so that they are visible for other packages
 target_include_directories(listener PUBLIC
   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
   $<INSTALL_INTERFACE:include>)
 
-# install dependencies to the lib to allow ros to find them
-install(TARGETS listener
-  DESTINATION lib/${PROJECT_NAME})
 
 if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)
