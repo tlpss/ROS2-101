@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.5)
-project(empty_cpp)
+project(talker_listener_cpp)
 
 # Default to C99
 if(NOT CMAKE_C_STANDARD)
@@ -18,36 +18,33 @@ endif()
 # find dependencies
 find_package(ament_cmake REQUIRED)
 find_package(rclcpp REQUIRED)
+find_package(std_msgs REQUIRED)
 
-add_executable(empty_cpp_node src/empty_cpp_node.cpp) # create an executable (that can be called with ros2 run)
-target_include_directories(empty_cpp_node PUBLIC # make the include directory linked to the executable publically available (.h file)
+# add executables and declare dependencies
+add_executable(listener src/listener.cpp)
+ament_target_dependencies(
+  listener
+  rclcpp
+  std_msgs
+)
+
+# include library headers so that they are visible for other packages
+target_include_directories(listener PUBLIC
   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
   $<INSTALL_INTERFACE:include>)
 
-ament_target_dependencies( # link dependencies for the executable
-  empty_cpp_node
-  "rclcpp"
-)
-
-install(TARGETS empty_cpp_node # install the headers/executables
+# install dependencies to the lib to allow ros to find them
+install(TARGETS listener
   DESTINATION lib/${PROJECT_NAME})
 
 if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)
-  find_package(ament_cmake_gtest REQUIRED)
   # the following line skips the linter which checks for copyrights
   # uncomment the line when a copyright and license is not present in all source files
   set(ament_cmake_copyright_FOUND TRUE)
   # the following line skips cpplint (only works in a git repo)
   # uncomment the line when this package is not in a git repo
   #set(ament_cmake_cpplint_FOUND TRUE)
-
-  ## add tests
-  include_directories(test)
-  ament_add_gtest(dummy_test test/dummy_test.cpp)
-  # add dependencies if required
-  #ament_target_dependencies(dummy_test <dummy_dependencies>)
-
   ament_lint_auto_find_test_dependencies()
 endif()
 

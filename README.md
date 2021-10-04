@@ -76,6 +76,8 @@ More information:
     - [ launch system](https://github.com/ros2/launch/blob/foxy/launch/doc/source/architecture.rst)
     - [ros launch syntax](https://github.com/ros2/launch_ros/tree/master/launch_ros/launch_ros)
 ## Coding
+### using virtualenvs for python
+https://docs.ros.org/en/foxy/How-To-Guides/Using-Python-Packages.html#installing-via-a-virtual-environment
 ### creating custom interfaces 
 https://docs.ros.org/en/foxy/Concepts/About-ROS-Interfaces.html 
 ### using parameters 
@@ -87,7 +89,7 @@ https://docs.ros.org/en/foxy/Tutorials/Using-Parameters-In-A-Class-Python.html#p
 - cli interface with topics/services/actions/...
 
 ### testing
-- build using colcon  (with arg to create compilation database for vscode IDE ) `colcon build --cmake-args -DCMAKE_EXPORT_COMPILE_COMMANDS=1`
+- build using colcon  **from ws root!** (with arg to create compilation database for vscode IDE ) `colcon build --cmake-args -DCMAKE_EXPORT_COMPILE_COMMANDS=1`
 - to run the tests`colcon test --packages-select <package>`
 - to see the test output `colcon test-result --test-result-base build/<package> --verbose`
 #### license sidenote:
