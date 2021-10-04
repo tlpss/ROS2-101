@@ -3,13 +3,20 @@ build:
     colcon build --symlink-install
     source /install/setup.bash
 
-pre-commit:
-    # code cleanup
+# code cleanup with autoflake
+autoflake:
     autoflake --remove-all-unused-imports --recursive --remove-unused-variables --in-place --ignore-init-module-imports .
-    # sort imports
+
+# linting with black
+black:
+    black --line-length 119 ./src
+
+# sort imports with isort
+isort: 
     isort --profile black --line-length 119 .
-    #linter
-    black --line-length 119 .
-    # static type checking
-    #    mypy --ignore-missing-imports ./src/
+
+# cleanup + sort + linting
+pre-commit: autoflake isort black
+
+
 
