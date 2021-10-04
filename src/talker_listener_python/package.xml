@@ -8,7 +8,8 @@
   <license>TODO: License declaration</license>
 
   <depend>rclpy</depend>
-
+  <depend>std_msgs</depend> 
+  <!-- depend specifies build, exec and test dep.-->
   <test_depend>python3-pytest</test_depend>
 
   <export>
