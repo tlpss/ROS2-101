@@ -65,7 +65,8 @@ There are two ways to start up nodes:
 - `ros2 run` can run all executables that were linked in the setup.py entrypoints or as executable in the cmake file
 - `ros2 launch` uses "launchfiles" that can launch multiple nodes (executables typically run 1 node). 
 
-both command will look in the `/lib` folder which is why both python and c++ nodes need to 
+both command will look in the `/lib` folder when using the ` <package> <executable/launch>` syntax. Alternatively you can navigate to the source file which avoids the need for having it in lib (useful for testing launch files)
+
 ### launch files (python)
 ROS2 has created a new syntax for launching multiple nodes etc. from python. 
 
