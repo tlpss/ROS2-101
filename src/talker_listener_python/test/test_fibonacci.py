@@ -2,6 +2,7 @@ import unittest
 
 from talker_listener_python.fibonacci import Fibonacci
 
+
 class TestFibonacci(unittest.TestCase):
     def test_sequence(self):
         fib = Fibonacci()
