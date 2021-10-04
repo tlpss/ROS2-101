@@ -28,6 +28,12 @@ ament_target_dependencies(
   std_msgs
 )
 
+# add component to library 
+add_library(talker_component SHARED
+   src/talker_component.cpp)
+rclcpp_components_register_nodes(talker_component "Talker")
+
+
 # include library headers so that they are visible for other packages
 target_include_directories(listener PUBLIC
   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
