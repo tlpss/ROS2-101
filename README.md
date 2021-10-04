@@ -9,23 +9,28 @@ Some ROS2 examples made during my exploration to complement the available docume
 ## information sources
 - https://docs.ros.org/en/foxy/Tutorials.html
 - example node https://github.com/SteveMacenski/slam_toolbox/tree/foxy-devel (and Nav2 stack in general)
-- gh actions CI https://github.com/marketplace/actions/ros-2-ci-action#Build-and-run-tests-for-your-ROS-2-package
-- vs code setup https://samarth-robo.github.io/blog/2020/12/03/vscode_ros.html 
+- [gh actions CI](https://github.com/marketplace/actions/ros-2-ci-action#Build-and-run-tests-for-your-ROS-2-package)
+- [vs code setup](https://samarth-robo.github.io/blog/2020/12/03/vscode_ros.html)
 
 
 
-## ROS2 commands / information
+## ROS2
+ROS can be seen as a core message passing system over a middleware, that allows to create software components (nodes) that can interact through async communications (topics w/ publishers and subscribers) or sync communication (services) or long-term communication (action servers). Because of its modularity, ROS allows to reuse nodes in different projects. 
 
-running ros code always involves a few steps:
+More about ROS2 vs. ROS1 [here](https://roboticsbackend.com/ros1-vs-ros2-practical-overview/#Why_ROS2_and_not_keep_ROS1)
+
+
+create ros systems always involves a few steps:
 - create a common `/src` folder to keep the top level clean
 - create packages
-- write code for the packages
+- write code for the packages to build nodes (or in cpp [Components](https://docs.ros.org/en/foxy/Concepts/About-Composition.html#writing-a-component)) in one of the client library languages. 
 - create the build files that are required for colcon (ament) to build and connect everything
-- run the executable nodes or run launch files (after creating them)
+- run the executable nodes or create launch files
 
 
 
-### package creation
+## package creation 
+### creating new packages
  (cf https://docs.ros.org/en/foxy/Tutorials/Creating-Your-First-ROS2-Package.html)
 - rclpy: `ros2 pkg create <package name> [--node-name <node name> ] --build-type ament_python --dependencies rclpy`
 - rclcpp: `ros2 pkg create --build-type ament_cmake [--node-name <node name>] <package name>  --dependencies rclcpp`
@@ -33,20 +38,50 @@ running ros code always involves a few steps:
 where `ament_cmake/python` tells colcon which additional files to create to build the packages (setup.cfg setup. py vs cmakelist.txt)
 
 to see examples of this template, see the `empty_{cpp|python}` nodes.
-### cmakelist syntax (rclcpp)
+
+### Nodes vs Composables
+in ROS2 (rclcpp), composables are nodes that can be @runtime spinned up on the same process to allow for efficient data-sharing. (cf ROS1 "nodelet")
+
+They use the `composableNode` action in a launch file and should be declared without main function (but included in the component library). This is the preferred way of creating new C++ "nodes". 
+https://docs.ros.org/en/foxy/Concepts/About-Composition.html#writing-a-component
+## package build information
+#### cmakelist syntax (rclcpp)
 https://docs.ros.org/en/foxy/How-To-Guides/Ament-CMake-Documentation.html 
-### setup. py syntax (rclpy)
+
+
+some steps:
+- add dependencies for all executables 
+- link executables
+- library -> same + header discovery
+- other folders -> migrate to share. 
+
+#### setup. py syntax (rclpy)
 just include the executables (entrypoints).. no build etc required, so considerably easier.
+Don't forget to include the launch files if applicable (see )
 
+## Executing Nodes
+There are two ways to start up nodes:
 
-#### run vs launch
 - `ros2 run` can run all executables that were linked in the setup.py entrypoints or as executable in the cmake file
 - `ros2 launch` uses "launchfiles" that can launch multiple nodes (executables typically run 1 node). 
 
+both command will look in the `/lib` folder which is why both python and c++ nodes need to 
 ### launch files (python)
+ROS2 has created a new syntax for launching multiple nodes etc. from python. 
+
+More information:
+- basic tutorial - https://docs.ros.org/en/foxy/Tutorials/Launch-system.html 
+- advanced (source code == documentation..):
+    - [ launch system](https://github.com/ros2/launch/blob/foxy/launch/doc/source/architecture.rst)
+    - [ros launch syntax](https://github.com/ros2/launch_ros/tree/master/launch_ros/launch_ros)
+## Coding
+### creating custom interfaces 
+https://docs.ros.org/en/foxy/Concepts/About-ROS-Interfaces.html 
+### using parameters 
+https://docs.ros.org/en/foxy/Tutorials/Using-Parameters-In-A-Class-Python.html#pythonparamnode
 
 ### debugging / visualisation
-- rqt 
+- rqt (can also view log/topics/...)
 -rqt_graph (nodes/topics)
 - cli interface with topics/services/actions/...
 
@@ -56,7 +91,7 @@ just include the executables (entrypoints).. no build etc required, so considera
 - to see the test output `colcon test-result --test-result-base build/<package> --verbose`
 #### license sidenote:
 - ament requires license + copyrights to pass the tests.. TODO-> find way to disable this.
-#### creating tests
+### creating tests
 | client | library unittest | ros unittest | ros integrationtest|
 | --- | ---- | --- |---|
 | rclcpp| gtest | .. | .. | 
