@@ -35,9 +35,10 @@ create ros systems always involves a few steps:
 - rclpy: `ros2 pkg create <package name> [--node-name <node name> ] --build-type ament_python --dependencies rclpy`
 - rclcpp: `ros2 pkg create --build-type ament_cmake [--node-name <node name>] <package name>  --dependencies rclcpp`
 
-where `ament_cmake/python` tells colcon which additional files to create to build the packages (setup.cfg setup. py vs cmakelist.txt)
-
+where `ament_cmake/python` tells colcon which additional files to create to build the packages (setup.cfg setup. py vs cmakelist.txt).
 to see examples of this template, see the `empty_{cpp|python}` nodes.
+
+The `package.xml` helps to discover and install dependencies with rosdep using `rosdep install --from-paths src --ignore-src -r -y`
 
 ### Nodes vs Composables
 in ROS2 (rclcpp), composables are nodes that can be @runtime spinned up on the same process to allow for efficient data-sharing. (cf ROS1 "nodelet")
@@ -55,6 +56,7 @@ some steps:
 - library -> same + header discovery
 - other folders -> migrate to share. 
 
+A nicely documented example can be found [here](https://github.com/ros-planning/moveit2/blob/foxy/moveit_ros/moveit_servo/CMakeLists.txt)
 #### setup. py syntax (rclpy)
 just include the executables (entrypoints).. no build etc required, so considerably easier.
 Don't forget to include the launch files if applicable (see )
@@ -75,6 +77,8 @@ More information:
 - advanced (source code == documentation..):
     - [ launch system](https://github.com/ros2/launch/blob/foxy/launch/doc/source/architecture.rst)
     - [ros launch syntax](https://github.com/ros2/launch_ros/tree/master/launch_ros/launch_ros)
+
+- launch files can also be [nested](https://github.com/UniversalRobots/Universal_Robots_ROS2_Driver/blob/foxy/ur_bringup/launch/ur3e.launch.py)
 ## Coding
 ### using virtualenvs for python
 https://docs.ros.org/en/foxy/How-To-Guides/Using-Python-Packages.html#installing-via-a-virtual-environment
