@@ -24,6 +24,7 @@ find_package(rclcpp_components REQUIRED)
 # include include 
 include_directories(include)
 
+### ADD EXECUTABLES ### 
 # add executables and declare dependencies
 add_executable(listener src/listener.cpp)
 ament_target_dependencies(
@@ -31,6 +32,8 @@ ament_target_dependencies(
   rclcpp
   std_msgs
 )
+
+### ADD COMPONENT ### 
 
 # add component to library 
 add_library(talker_component SHARED
@@ -42,22 +45,22 @@ ament_target_dependencies(
   std_msgs
   rclcpp_components
 )
+# register component
 rclcpp_components_register_nodes(talker_component "composition::Talker")
 
 
-
-# install dependencies to the lib to allow ros to find them
+### INSTALL ### 
+# install executables to the lib to allow ros to find them
 install(
   TARGETS 
   listener
-  talker_component
   DESTINATION lib/${PROJECT_NAME})
 
   install(TARGETS # components require additional target? TODO: figure out why...
   talker_component
   ARCHIVE DESTINATION lib
   LIBRARY DESTINATION lib
-  RUNTIME DESTINATION bin)
+  RUNTIME DESTINATION lib/${PROJECT_NAME})
 
 # install launc files to allow ros to find them
 install(DIRECTORY
