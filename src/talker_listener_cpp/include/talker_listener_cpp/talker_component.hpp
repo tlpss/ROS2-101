@@ -6,11 +6,10 @@
 
 namespace composition
 {
-
 class Talker : public rclcpp::Node
 {
 public:
-  explicit Talker(const rclcpp::NodeOptions & options);
+  explicit Talker(const rclcpp::NodeOptions& options);
 
 protected:
   void on_timer();

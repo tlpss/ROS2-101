@@ -8,7 +8,5 @@ class TestFibonacci(unittest.TestCase):
         fib = Fibonacci()
 
         fib_list = [fib(), fib(), fib(), fib()]
-        desired_list = [1,2, 3, 5]
+        desired_list = [1, 2, 3, 5]
         self.assertListEqual(fib_list, desired_list)
-        
-

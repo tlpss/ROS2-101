@@ -15,7 +15,7 @@ Some ROS2 examples made during my exploration to complement the available docume
 
 
 ## ROS2
-ROS can be seen as a core message passing system over a middleware, that allows to create software components (nodes) that can interact through async communications (topics w/ publishers and subscribers) or sync communication (services) or long-term communication (action servers). Because of its modularity, ROS allows to reuse nodes in different projects. 
+ROS can be seen as a core message passing system over a middleware, that allows to create software components (nodes) that can interact through async communications (topics w/ publishers and subscribers) or sync communication (services) or long-term communication (action servers). Because of its modularity, ROS allows to reuse nodes in different projects.
 
 More about ROS2 vs. ROS1 [here](https://roboticsbackend.com/ros1-vs-ros2-practical-overview/#Why_ROS2_and_not_keep_ROS1)
 
@@ -23,13 +23,13 @@ More about ROS2 vs. ROS1 [here](https://roboticsbackend.com/ros1-vs-ros2-practic
 create ros systems always involves a few steps:
 - create a common `/src` folder to keep the top level clean
 - create packages
-- write code for the packages to build nodes (or in cpp [Components](https://docs.ros.org/en/foxy/Concepts/About-Composition.html#writing-a-component)) in one of the client library languages. 
+- write code for the packages to build nodes (or in cpp [Components](https://docs.ros.org/en/foxy/Concepts/About-Composition.html#writing-a-component)) in one of the client library languages.
 - create the build files that are required for colcon (ament) to build and connect everything
 - run the executable nodes or create launch files
 
 
 
-## package creation 
+## package creation
 ### creating new packages
  (cf https://docs.ros.org/en/foxy/Tutorials/Creating-Your-First-ROS2-Package.html)
 - rclpy: `ros2 pkg create <package name> [--node-name <node name> ] --build-type ament_python --dependencies rclpy`
@@ -43,18 +43,18 @@ The `package.xml` helps to discover and install dependencies with rosdep using `
 ### Nodes vs Composables
 in ROS2 (rclcpp), composables are nodes that can be @runtime spinned up on the same process to allow for efficient data-sharing. (cf ROS1 "nodelet")
 
-They use the `composableNode` action in a launch file and should be declared without main function (but included in the component library). This is the preferred way of creating new C++ "nodes". 
+They use the `composableNode` action in a launch file and should be declared without main function (but included in the component library). This is the preferred way of creating new C++ "nodes".
 https://docs.ros.org/en/foxy/Concepts/About-Composition.html#writing-a-component
 ## package build information
 #### cmakelist syntax (rclcpp)
-https://docs.ros.org/en/foxy/How-To-Guides/Ament-CMake-Documentation.html 
+https://docs.ros.org/en/foxy/How-To-Guides/Ament-CMake-Documentation.html
 
 
 some steps:
-- add dependencies for all executables 
+- add dependencies for all executables
 - link executables
 - library -> same + header discovery
-- other folders -> migrate to share. 
+- other folders -> migrate to share.
 
 A nicely documented example can be found [here](https://github.com/ros-planning/moveit2/blob/foxy/moveit_ros/moveit_servo/CMakeLists.txt)
 #### setup. py syntax (rclpy)
@@ -65,15 +65,15 @@ Don't forget to include the launch files if applicable (see )
 There are two ways to start up nodes:
 
 - `ros2 run` can run all executables that were linked in the setup.py entrypoints or as executable in the cmake file
-- `ros2 launch` uses "launchfiles" that can launch multiple nodes (executables typically run 1 node). 
+- `ros2 launch` uses "launchfiles" that can launch multiple nodes (executables typically run 1 node).
 
 both command will look in the `/lib` folder when using the ` <package> <executable/launch>` syntax. Alternatively you can navigate to the source file which avoids the need for having it in lib (useful for testing launch files)
 
 ### launch files (python)
-ROS2 has created a new syntax for launching multiple nodes etc. from python. 
+ROS2 has created a new syntax for launching multiple nodes etc. from python.
 
 More information:
-- basic tutorial - https://docs.ros.org/en/foxy/Tutorials/Launch-system.html 
+- basic tutorial - https://docs.ros.org/en/foxy/Tutorials/Launch-system.html
 - advanced (source code == documentation..):
     - [ launch system](https://github.com/ros2/launch/blob/foxy/launch/doc/source/architecture.rst)
     - [ros launch syntax](https://github.com/ros2/launch_ros/tree/master/launch_ros/launch_ros)
@@ -82,9 +82,9 @@ More information:
 ## Coding
 ### using virtualenvs for python
 https://docs.ros.org/en/foxy/How-To-Guides/Using-Python-Packages.html#installing-via-a-virtual-environment
-### creating custom interfaces 
-https://docs.ros.org/en/foxy/Concepts/About-ROS-Interfaces.html 
-### using parameters 
+### creating custom interfaces
+https://docs.ros.org/en/foxy/Concepts/About-ROS-Interfaces.html
+### using parameters
 https://docs.ros.org/en/foxy/Tutorials/Using-Parameters-In-A-Class-Python.html#pythonparamnode
 
 ### debugging / visualisation
@@ -101,7 +101,7 @@ https://docs.ros.org/en/foxy/Tutorials/Using-Parameters-In-A-Class-Python.html#p
 ### creating tests
 | client | library unittest | ros unittest | ros integrationtest|
 | --- | ---- | --- |---|
-| rclcpp| gtest | .. | .. | 
+| rclcpp| gtest | .. | .. |
 | rclpy | unittest/pytest | ..| .. |
 
 

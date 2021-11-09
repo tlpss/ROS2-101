@@ -21,10 +21,10 @@ find_package(rclcpp REQUIRED)
 find_package(std_msgs REQUIRED)
 find_package(rclcpp_components REQUIRED)
 
-# include include 
+# include include
 include_directories(include)
 
-### ADD EXECUTABLES ### 
+### ADD EXECUTABLES ###
 # add executables and declare dependencies
 add_executable(listener src/listener.cpp)
 ament_target_dependencies(
@@ -33,15 +33,15 @@ ament_target_dependencies(
   std_msgs
 )
 
-### ADD COMPONENT ### 
+### ADD COMPONENT ###
 
-# add component to library 
+# add component to library
 add_library(talker_component SHARED
    src/talker_component.cpp)
 # link component dependencies
 ament_target_dependencies(
   talker_component
-  rclcpp 
+  rclcpp
   std_msgs
   rclcpp_components
 )
@@ -49,10 +49,10 @@ ament_target_dependencies(
 rclcpp_components_register_nodes(talker_component "composition::Talker")
 
 
-### INSTALL ### 
+### INSTALL ###
 # install executables to the lib to allow ros to find them
 install(
-  TARGETS 
+  TARGETS
   listener
   DESTINATION lib/${PROJECT_NAME})
 

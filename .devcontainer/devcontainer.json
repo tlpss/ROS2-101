@@ -1,11 +1,11 @@
-// https://code.visualstudio.com/docs/remote/devcontainerjson-reference 
+// https://code.visualstudio.com/docs/remote/devcontainerjson-reference
 {
 	"name": "ROS Foxy dev",
 	"build": {
 		"dockerfile": "Dockerfile",
 		"context": "..",
-		"args": { 
-			
+		"args": {
+
 		}
 	},
 
