@@ -1,0 +1,28 @@
+// https://code.visualstudio.com/docs/remote/devcontainerjson-reference 
+{
+	"name": "ROS Foxy dev",
+	"build": {
+		"dockerfile": "Dockerfile",
+		"context": "..",
+		"args": { 
+			
+		}
+	},
+
+
+	// Add the IDs of extensions you want installed when the container is created.
+	"extensions": [
+		"ms-vscode.cpptools",
+		"ms-iot.vscode-ros",
+		"ms-python.python",
+	],
+
+	// Use 'forwardPorts' to make a list of ports inside the container available locally.
+	// "forwardPorts": [],
+
+	// Use 'postCreateCommand' to run commands after the container is created.
+	 "postCreateCommand": "bash build.sh", // build the workspaces upon starting the container.
+
+	// Comment out connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
+	//"remoteUser": "vscode"
+}
