@@ -94,10 +94,9 @@ https://docs.ros.org/en/foxy/Tutorials/Using-Parameters-In-A-Class-Python.html#p
 
 ### testing
 - build using colcon  **from ws root!** (with arg to create compilation database for vscode IDE ) `colcon build --cmake-args -DCMAKE_EXPORT_COMPILE_COMMANDS=1`
-- to run the tests`colcon test --packages-select <package>`
+- to run the tests`colcon test --packages-select <package>` which will run pytest for the python packages and the cmake `if(BUILD_TESTING)' code for the cpp packages.
 - to see the test output `colcon test-result --test-result-base build/<package> --verbose`
-#### license sidenote:
-- ament requires license + copyrights to pass the tests.. TODO-> find way to disable this.
+
 ### creating tests
 | client | library unittest | ros unittest | ros integrationtest|
 | --- | ---- | --- |---|
@@ -106,3 +105,9 @@ https://docs.ros.org/en/foxy/Tutorials/Using-Parameters-In-A-Class-Python.html#p
 
 
 [gtest](https://google.github.io/googletest/quickstart-cmake.html) documentation & [test/ build example](https://github.com/SteveMacenski/slam_toolbox/blob/foxy-devel/CMakeLists.txt)
+
+#### ament_cmake testing tools
+
+ament cmake has a set of predefined linting/formatting checks, which are listed here: https://github.com/ament/ament_lint/tree/foxy. A common set of them is combined in the `ament_lint_common` package that is by default included as test dependency in new packages. `ament_lint_auto` is a [tool](https://github.com/ament/ament_lint/blob/master/ament_lint_auto/doc/index.rst) that can find all test dependencies and execute the corresponding linters.
+
+Since all formatting in this repo is done with pre-commit hooks, no additional (possibly conflicting) formatting is required. Some linters might prove to be useful nonetheless, so these could be added manually.
